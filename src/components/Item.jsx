@@ -1,34 +1,30 @@
 import React, { useState } from 'react'
+import { ItemContext } from './Left'
 
 import "./sidebar.css"
 
 const Item = (
 
-  {enabled,idx,setT,dispatch,values,checkedtext,fun4}
-  // {setText,enabled,checkedtext,idx,fun3,fun4,setChecked2,checked2,setT,setRight,setLeft,setErase}
+  
   
   ) => {
+
+
+    const {values,dispatch,enabled,txt,idx,setChecked,setT}=React.useContext(ItemContext)
  
 
 
     const handler=(e)=>{
-      // alert(values.right)
+      
       dispatch({
         type:"setRight",
         right:true
       })
-      //  alert(values.right)
+   
 
 
 
-        // setRight(true)
-        // setLeft(false)
-        // setErase(true)
-        // dispatch({
-        //   type:"setRight",
-        //   value:true
-
-        // })
+        
          dispatch({
           type:"setLeft",
           left:false
@@ -44,7 +40,7 @@ const Item = (
 
 
 
-        // fun3(e.target.value)
+       
          dispatch({
           type:"setText",
           text:e.target.value
@@ -60,15 +56,15 @@ const Item = (
 
 
 
-        fun4(true)
+        
+        setChecked(true)
 
 
         
         setT(e.target.value)
 
 
-        // setText(e.target.value)
-        // setChecked2(true)
+       
 
         dispatch({
           type:"setText",
@@ -83,11 +79,11 @@ const Item = (
     }
   return (
     <div className='item'>
-        <input checked={enabled} type="checkbox" value={checkedtext} className='input-checkbox' onChange={handler}/>
+        <input checked={enabled} type="checkbox" value={txt} className='input-checkbox' onChange={handler}/>
 
         
         
-        {checkedtext}
+        {txt}
         
         
         

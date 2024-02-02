@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import './sidebar.css'
 import Item from './Item';
+import { AppContext } from '../App';
 
-const Left = ({values,dispatch}) => {
+  export const ItemContext=React.createContext()
+
+const Left = (
+  
+  ) => {
+    
+
+
+
+  const {values,dispatch}=React.useContext(AppContext)
  
   const [inputFieldValue, setInputFieldValue] = useState('');
 
 
-  const [textItem,setTextItem]=useState("")
+ 
   const [checked,setChecked]=useState(false)
 
 
 
 
-  // let arr=["abc","def","ghi","klh"]
+ 
 
-  const [arr,setArr]=useState([])
+
   const [t,setT]=useState("")
   
 
   useEffect(()=>{
-    // deleteHandler(false)
+    
     dispatch({
       type:"setClickdelete",
       clickdelete:false
@@ -38,20 +48,18 @@ const Left = ({values,dispatch}) => {
 
   const handleAdd = () => {
 
-    // setText("")
+    
     dispatch({
       type: "setText",
       text:""
     })
     
-    // const newList = arr.concat(inputFieldValue);
-    // setArr(newList);
+
 
 
 
     const ne=values.tmp2?.concat(inputFieldValue)
-    // alert(ne)
-    // setTmp2(ne)
+    
     dispatch({
       type:'setTmp2',
       tmp2:ne
@@ -65,14 +73,13 @@ const Left = ({values,dispatch}) => {
 
 
   const handleInputFieldChange = (event) => {
-    // alert(text)
-    // setText("")
+    
     dispatch({
       type:"setText",
       text:""
     })
       setInputFieldValue(event.target.value);
-      // textHandler(event.target.value)
+      
        dispatch({
       type:"setText",
       text:event.target.value
@@ -81,24 +88,29 @@ const Left = ({values,dispatch}) => {
    
   };
 
+
+
   return (
     <div className='cont'>
       <div style={{marginTop:"100px"}}>
         <label htmlFor="text-field">Upper Section:</label>
       <div>
-        {/* {alert(values.tmp2)} */}
+       
 
         {
 
-          // alert(values.tmp2)
+       
           values.tmp2?.map((txt,idx)=>{
+            const enabled=(values.tmp2.indexOf(values.text)===idx)?true:false
 
 
 
             return (
-            // console.log(text)
-            // alert()
-            <Item enabled={(values.tmp2.indexOf(values.text)===idx)?true:false}  checkedtext={txt} key={idx} dispatch={dispatch} fun4={setChecked} values={values}  setT={setT} />
+   
+
+            <ItemContext.Provider value={{values,dispatch,enabled,txt,idx,setChecked,setT}}>
+            <Item/>
+            </ItemContext.Provider>
             )
           })
 
@@ -111,11 +123,7 @@ const Left = ({values,dispatch}) => {
 
       
 
-        {/* <Item text={"abcde"}/> */}
-
-
         
-        {/* {!click&&inputFieldValue} */}
       </div>
       </div>
       <div style={{marginTop:"30rem" ,left:"0px"}}>

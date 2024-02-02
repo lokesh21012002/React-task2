@@ -3,15 +3,20 @@ import './sidebar.css'
 
 import Item from './Item';
 import ItemRight from './ItemRight';
+import { AppContext } from '../App';
+
+export const RightItemContext=React.createContext()
 
 const Right = (
-  {values,dispatch}
-
-  // {text,clickdelete,textHandler,setText2,setRight,setLeft,setErase}
+  
   ) => {
 
 
-    const [arr,setArr]=useState(["abc","def","ghi"])
+    const {values,dispatch}=React.useContext(AppContext)
+    
+
+
+    
     const [t2,setT2]=useState("")
 
 
@@ -19,13 +24,11 @@ const Right = (
 
 
         useEffect(()=>{
-            // const prev=arr.concat(text)
-            // setArr(prev)
-        
+           
 
 
             if(values.clickdelete===true){
-                // textHandler("")  
+                 
                 dispatch({
                   type:"setText",
                   text:""
@@ -43,31 +46,24 @@ const Right = (
         <label htmlFor="text-field">Upper Section:</label>
       <div>
 
-        {/* {console.log(values.tmp)} */}
-        {/* {alert(values.text)} */}
-
+       
         {
             values.tmp?.map((val,idx)=>{
+              const enabled=(values.tmp.indexOf(values.text2)===idx)?true:false
                 
-                  return ( <ItemRight enabled={(values.tmp.indexOf(values.text2)===idx)?true:false} key={idx} text={val} 
-                    dispatch={dispatch} setT2={setT2} value={values}
-                  // setText2={setText2} setRight={setRight} setLeft={setLeft} setErase={setErase} setT2={setT2}
+                  return ( 
+                    <RightItemContext.Provider value={{enabled,idx,val,dispatch,setT2,values}}>
                   
-                  />)
+                  
+                  <ItemRight/>
+                  </RightItemContext.Provider>
+                  
+                  )
                 
             })
         }
 
-           {/* {
-          text.map((txt,idx)=>{
-
-            return (
-            // console.log(text)
-            <Item text={txt} key={idx} />
-            )
-          })
-        } */}
-        {/* {text} */}
+          
       </div>
       </div>
       <div style={{marginTop:"500px"}}>
