@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState,useRef } from 'react';
 import './sidebar.css'
 import Item from './Item';
 import { AppContext } from '../App';
@@ -8,6 +8,12 @@ import { AppContext } from '../App';
 const Left = (
   
   ) => {
+
+    const inputref=useRef(null)
+    useEffect(()=>{
+      inputref.current.focus()
+
+    },[])
     
 
 
@@ -46,7 +52,7 @@ const Left = (
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd =useCallback( () => {
 
     
     dispatch({
@@ -65,7 +71,7 @@ const Left = (
       tmp2:ne
     })
     setInputFieldValue("");
-  };
+  },[inputFieldValue,values.text,values.tmp2])
 
 
 
@@ -129,6 +135,7 @@ const Left = (
       <div style={{marginTop:"30rem" ,left:"0px"}}>
         
         <input
+        ref={inputref}
 
           type="text"
           id="input-field"
@@ -145,4 +152,4 @@ const Left = (
   );
 };
 
-export default Left;
+export default React.memo(Left);

@@ -60,4 +60,4 @@ const ItemRight = (
   )
 }
 
-export default ItemRight
+export default React.memo(ItemRight)

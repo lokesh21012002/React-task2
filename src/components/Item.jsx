@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useCallback } from 'react'
 import { ItemContext } from './Left'
 
 import "./sidebar.css"
@@ -93,4 +93,4 @@ const Item = (
   )
 }
 
-export default Item
+export default React.memo(Item)

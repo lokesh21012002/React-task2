@@ -73,4 +73,4 @@ const Right = (
   );
 };
 
-export default Right;
+export default React.memo(Right);
